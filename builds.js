@@ -39,8 +39,7 @@ Perfect for building, testing, or sandbox-style experiments.
         `,
         images: [
             'Construct1.png',
-            'Construct2.png',
-            'Construct3.png'
+            'Placeholder.png'
         ],
         downloadUrl: 'https://drive.google.com/uc?export=download&id=1gcEe5yPzCaXcOS_isCobOV5Yh4P6Bg5l',
         tags: ['Recreation', 'Sandbox']
