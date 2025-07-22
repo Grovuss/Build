@@ -3,7 +3,7 @@ const builds = [
         id: 'mc_flatgrass', 
         name: 'MC_Flatgrass', 
         description: `
-**A simple, open Minecraft recreation of GM_Flatgrass from Garry’s Mod.**
+**A simple, open Minecraft recreation of GM_Flatgrass from GMOD.**
 
 Perfect for building, testing, or sandbox-style experiments.
 
