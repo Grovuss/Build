@@ -87,8 +87,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Build Data & Sidebar ---
-    // Remove the local builds array and use the imported one
-
     // Load builds from builds.js
     const script = document.createElement('script');
     script.src = 'builds.js';
@@ -113,55 +111,38 @@ document.addEventListener('DOMContentLoaded', () => {
             general.forEach(tag => generalTags.add(tag));
         });
         
-        // Populate main category filter
-        const mainCategoryFilter = document.getElementById('main-category-filter');
-        mainCategories.forEach(cat => {
-            const option = document.createElement('option');
-            option.value = cat;
-            option.textContent = cat;
-            mainCategoryFilter.appendChild(option);
+        // Create custom dropdowns
+        const mainCategoryDropdown = createCustomDropdown('main-category-dropdown', mainCategories, (value) => {
+            updateTitleFilter(value);
+            filterBuilds();
         });
         
-        // Populate general filter
-        const generalFilter = document.getElementById('general-filter');
-        [...generalTags].sort().forEach(tag => {
-            const option = document.createElement('option');
-            option.value = tag;
-            option.textContent = tag;
-            generalFilter.appendChild(option);
+        const titleDropdown = createCustomDropdown('title-dropdown', []);
+        
+        const generalDropdown = createCustomDropdown('general-dropdown', [...generalTags].sort(), () => {
+            filterBuilds();
         });
         
-        // Initial render
-        renderBuilds(builds);
-        
-        // Add search and filter listeners
-        const searchInput = document.getElementById('search-input');
-        const mainCatSelect = document.getElementById('main-category-filter');
-        const titleSelect = document.getElementById('title-filter');
-        const generalSelect = document.getElementById('general-filter');
-        
-        function updateTitleFilter() {
-            const selectedMain = mainCatSelect.value;
-            titleSelect.innerHTML = '<option value="">All Titles</option>';
+        function updateTitleFilter(selectedMain) {
+            const titleOptions = selectedMain && titlesByCategory[selectedMain] 
+                ? [...titlesByCategory[selectedMain]].sort() 
+                : [];
             
-            if (selectedMain && titlesByCategory[selectedMain]) {
-                titleSelect.style.display = 'block';
-                [...titlesByCategory[selectedMain]].sort().forEach(title => {
-                    const option = document.createElement('option');
-                    option.value = title;
-                    option.textContent = title;
-                    titleSelect.appendChild(option);
-                });
-            } else {
-                titleSelect.style.display = 'none';
+            titleDropdown.populateOptions(titleOptions);
+            
+            const titleDropdownEl = document.getElementById('title-dropdown');
+            titleDropdownEl.style.display = titleOptions.length > 0 ? 'block' : 'none';
+            
+            if (titleOptions.length === 0) {
+                titleDropdown.setValue('');
             }
         }
         
         function filterBuilds() {
-            const searchTerm = searchInput.value.toLowerCase();
-            const selectedMain = mainCatSelect.value;
-            const selectedTitle = titleSelect.value;
-            const selectedGeneral = generalSelect.value;
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            const selectedMain = document.querySelector('#main-category-dropdown .dropdown-option.selected').dataset.value;
+            const selectedTitle = document.querySelector('#title-dropdown .dropdown-option.selected')?.dataset.value || '';
+            const selectedGeneral = document.querySelector('#general-dropdown .dropdown-option.selected').dataset.value;
             
             const filteredBuilds = builds.filter(build => {
                 const matchesSearch = build.name.toLowerCase().includes(searchTerm) ||
@@ -180,16 +161,90 @@ document.addEventListener('DOMContentLoaded', () => {
             renderBuilds(filteredBuilds);
         }
         
-        mainCatSelect.addEventListener('change', () => {
-            updateTitleFilter();
-            filterBuilds();
+        document.getElementById('search-input').addEventListener('input', filterBuilds);
+        
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', () => {
+            document.querySelectorAll('.dropdown-selected.open').forEach(sel => {
+                sel.classList.remove('open');
+                sel.nextElementSibling.classList.remove('show');
+            });
         });
         
-        titleSelect.addEventListener('change', filterBuilds);
-        generalSelect.addEventListener('change', filterBuilds);
-        searchInput.addEventListener('input', filterBuilds);
+        // Initial render
+        renderBuilds(builds);
     };
     document.head.appendChild(script);
+
+    function createCustomDropdown(elementId, options = [], onChange = null) {
+        const dropdown = document.getElementById(elementId);
+        const selected = dropdown.querySelector('.dropdown-selected');
+        const optionsContainer = dropdown.querySelector('.dropdown-options');
+        const optionsList = dropdown.querySelector('.dropdown-options');
+        
+        function populateOptions(optionsArray) {
+            optionsList.innerHTML = `<div class="dropdown-option selected" data-value="">All ${elementId.includes('category') ? 'Categories' : elementId.includes('title') ? 'Titles' : 'Types'}</div>`;
+            
+            optionsArray.forEach(option => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'dropdown-option';
+                optionDiv.dataset.value = option;
+                optionDiv.textContent = option;
+                optionsList.appendChild(optionDiv);
+            });
+        }
+        
+        function toggleDropdown(e) {
+            e.stopPropagation();
+            const isOpen = selected.classList.contains('open');
+            
+            // Close all other dropdowns
+            document.querySelectorAll('.dropdown-selected.open').forEach(sel => {
+                if (sel !== selected) {
+                    sel.classList.remove('open');
+                    sel.nextElementSibling.classList.remove('show');
+                }
+            });
+            
+            selected.classList.toggle('open', !isOpen);
+            optionsContainer.classList.toggle('show', !isOpen);
+        }
+        
+        function selectOption(optionElement) {
+            const value = optionElement.dataset.value;
+            const text = optionElement.textContent;
+            
+            selected.querySelector('span').textContent = text;
+            
+            optionsList.querySelectorAll('.dropdown-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            optionElement.classList.add('selected');
+            
+            selected.classList.remove('open');
+            optionsContainer.classList.remove('show');
+            
+            if (onChange) onChange(value);
+        }
+        
+        selected.addEventListener('click', toggleDropdown);
+        
+        optionsContainer.addEventListener('click', (e) => {
+            if (e.target.classList.contains('dropdown-option')) {
+                selectOption(e.target);
+            }
+        });
+        
+        populateOptions(options);
+        
+        return {
+            populateOptions,
+            setValue: (value) => {
+                const option = optionsList.querySelector(`[data-value="${value}"]`);
+                if (option) selectOption(option);
+            }
+        };
+    }
 
     function renderBuilds(buildsToRender) {
         buildsList.innerHTML = '';
