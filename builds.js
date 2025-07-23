@@ -26,9 +26,9 @@ Perfect for building, testing, or sandbox-style experiments.
         id: 'mc_construct', 
         name: 'MC_Construct', 
         description: `
-**A simple, open Minecraft recreation of GM_Construct from GMOD.**
+**A faithful, Minecraft recreation of GM_Construct from GMOD.**
 
-Perfect for building, testing, or sandbox-style experiments.
+Explore a clean, versatile space ideal for building, experimenting with redstone, testing creations, or hosting sandbox-style sessions with friends.
 
 ## Features
 
@@ -39,7 +39,8 @@ Perfect for building, testing, or sandbox-style experiments.
         `,
         images: [
             'Construct1.png',
-            'Placeholder.png'
+            'Construct2.png',
+            'Construct3.png'
         ],
         downloadUrl: 'https://drive.google.com/uc?export=download&id=1gcEe5yPzCaXcOS_isCobOV5Yh4P6Bg5l',
         tags: ['Recreation', 'Sandbox']
