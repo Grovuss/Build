@@ -131,8 +131,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Add event listeners for image click
         const images = buildsMain.querySelectorAll('.build-images img');
+        const imageSrcs = Array.from(images).map(img => img.src);
         images.forEach(img => {
-            img.addEventListener('click', () => openModal(img.src));
+            img.addEventListener('click', () => openModal(img.src, imageSrcs));
         });
 
         // Add event listener for download button
@@ -151,9 +152,57 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalImg = document.getElementById('modal-img');
     const closeBtn = document.querySelector('.close');
 
-    function openModal(src) {
+    let currentImages = [];
+    let currentIndex = 0;
+
+    function openModal(src, images = []) {
+        currentImages = images;
+        currentIndex = images.indexOf(src);
         modal.style.display = 'block';
         modalImg.src = src;
+        updateArrows();
+    }
+
+    function updateArrows() {
+        let prevArrow = modal.querySelector('.arrow-left');
+        let nextArrow = modal.querySelector('.arrow-right');
+        
+        if (currentImages.length <= 1) {
+            if (prevArrow) prevArrow.remove();
+            if (nextArrow) nextArrow.remove();
+            return;
+        }
+
+        if (!prevArrow) {
+            prevArrow = document.createElement('span');
+            prevArrow.className = 'arrow-left';
+            prevArrow.innerHTML = '&#10094;';
+            prevArrow.onclick = (e) => {
+                e.stopPropagation();
+                navigateImage(-1);
+            };
+            modal.appendChild(prevArrow);
+        }
+
+        if (!nextArrow) {
+            nextArrow = document.createElement('span');
+            nextArrow.className = 'arrow-right';
+            nextArrow.innerHTML = '&#10095;';
+            nextArrow.onclick = (e) => {
+                e.stopPropagation();
+                navigateImage(1);
+            };
+            modal.appendChild(nextArrow);
+        }
+
+        prevArrow.style.display = currentIndex === 0 ? 'none' : 'block';
+        nextArrow.style.display = currentIndex === currentImages.length - 1 ? 'none' : 'block';
+    }
+
+    function navigateImage(direction) {
+        currentIndex = (currentIndex + direction + currentImages.length) % currentImages.length;
+        modalImg.src = currentImages[currentIndex];
+        updateArrows();
     }
 
     closeBtn.addEventListener('click', () => {
@@ -163,6 +212,14 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('click', (e) => {
         if (e.target === modal) {
             modal.style.display = 'none';
+        }
+    });
+
+    window.addEventListener('keydown', (e) => {
+        if (modal.style.display === 'block') {
+            if (e.key === 'ArrowLeft') navigateImage(-1);
+            if (e.key === 'ArrowRight') navigateImage(1);
+            if (e.key === 'Escape') modal.style.display = 'none';
         }
     });
 
