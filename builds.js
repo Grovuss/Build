@@ -39,8 +39,8 @@ Explore a clean, versatile space ideal for building, experimenting with redstone
         `,
         images: [
             'Construct1.png',
-            'Placeholder.png',
-            'Placeholder.png'
+            'Construct2.png',
+            'Construct3.png'
         ],
         downloadUrl: 'https://drive.google.com/uc?export=download&id=1msV2Psl6yGXG81RQ7O_xDCZaK5pFXKVW',
         tags: ['Game', "Garry's Mod", 'Sandbox']
