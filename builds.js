@@ -20,9 +20,9 @@ Perfect for building, testing, or sandbox-style experiments.
             'Flatgrass3.png'
         ],
         downloadUrl: 'https://drive.google.com/uc?export=download&id=1gcEe5yPzCaXcOS_isCobOV5Yh4P6Bg5l',
-        tags: ['Recreation', 'Sandbox']
+        tags: ['Game', "Garry's Mod", 'Sandbox']
     },
- { 
+    { 
         id: 'mc_construct', 
         name: 'MC_Construct', 
         description: `
@@ -32,7 +32,7 @@ Explore a clean, versatile space ideal for building, experimenting with redstone
 
 ## Features
 
-- **Accurate layout** — scaled to closely match the Source engine’s iconic geometry
+- **Accurate layout** — scaled to closely match the Source engine's iconic geometry
 - **Natural elements integrated** — trees, bushes, and water features blend with the urban environment
 - **Ample flat surfaces and structures** — perfect for building, roleplay, or redstone contraptions
 - **Hidden room** — just like the original, tucked beneath some stairs
@@ -43,7 +43,7 @@ Explore a clean, versatile space ideal for building, experimenting with redstone
             'Construct3.png'
         ],
         downloadUrl: 'https://drive.google.com/uc?export=download&id=1msV2Psl6yGXG81RQ7O_xDCZaK5pFXKVW',
-        tags: ['Recreation', 'Sandbox']
+        tags: ['Game', "Garry's Mod", 'Sandbox']
     }
 ];
 
