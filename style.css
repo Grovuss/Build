@@ -443,6 +443,162 @@ body[data-theme='light'] .builds-sidebar {
     border-color: var(--light-glass-border);
 }
 
+.builds-main {
+    flex: 1;
+    backdrop-filter: blur(20px);
+    background: var(--dark-glass);
+    border: 1px solid var(--dark-glass-border);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    transition: var(--transition-medium);
+}
+
+body[data-theme='light'] .builds-main {
+    background: var(--light-glass);
+    border-color: var(--light-glass-border);
+}
+
+.build-header {
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--dark-glass-border);
+    padding-bottom: 1.5rem;
+}
+
+body[data-theme='light'] .build-header {
+    border-color: var(--light-glass-border);
+}
+
+.build-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.build-images {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.build-images img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition-medium);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.build-images img:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+body[data-theme='dark'] .build-images img:hover {
+    box-shadow: 0 8px 25px rgba(113, 173, 116, 0.2);
+}
+
+body[data-theme='light'] .build-images img:hover {
+    box-shadow: 0 8px 25px rgba(55, 66, 48, 0.15);
+}
+
+.build-description {
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.build-description h1,
+.build-description h2,
+.build-description h3 {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.build-description h1 {
+    font-size: 1.75rem;
+}
+
+.build-description h2 {
+    font-size: 1.5rem;
+}
+
+.build-description h3 {
+    font-size: 1.25rem;
+}
+
+.build-description ul {
+    margin: 1rem 0;
+    padding-left: 2rem;
+}
+
+.build-description li {
+    margin-bottom: 0.5rem;
+}
+
+.build-description p {
+    margin-bottom: 1rem;
+}
+
+.build-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.tag {
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 500;
+    transition: var(--transition-medium);
+}
+
+.tag[data-type="Game"],
+.tag[data-type="Movie"],
+.tag[data-type="Show"],
+.tag[data-type="Other"] {
+    background: rgba(220, 53, 69, 0.2);
+    color: #dc3545;
+    border: 1px solid rgba(220, 53, 69, 0.3);
+}
+
+.tag[data-type="title"] {
+    background: rgba(0, 123, 255, 0.2);
+    color: #007bff;
+    border: 1px solid rgba(0, 123, 255, 0.3);
+}
+
+.tag:not([data-type="Game"]):not([data-type="Movie"]):not([data-type="Show"]):not([data-type="Other"]):not([data-type="title"]) {
+    background: rgba(108, 117, 125, 0.2);
+    color: #6c757d;
+    border: 1px solid rgba(108, 117, 125, 0.3);
+}
+
+body[data-theme='light'] .tag[data-type="Game"],
+body[data-theme='light'] .tag[data-type="Movie"],
+body[data-theme='light'] .tag[data-type="Show"],
+body[data-theme='light'] .tag[data-type="Other"] {
+    background: rgba(220, 53, 69, 0.1);
+    color: #c82333;
+}
+
+body[data-theme='light'] .tag[data-type="title"] {
+    background: rgba(0, 123, 255, 0.1);
+    color: #0056b3;
+}
+
+body[data-theme='light'] .tag:not([data-type="Game"]):not([data-type="Movie"]):not([data-type="Show"]):not([data-type="Other"]):not([data-type="title"]) {
+    background: rgba(108, 117, 125, 0.1);
+    color: #545b62;
+}
+
+.tag:hover {
+    transform: translateY(-2px);
+}
+
 #builds-list {
     list-style: none;
     margin: 0;
@@ -925,6 +1081,22 @@ body[data-theme='light'] .empty-state {
     .arrow-right:hover {
         background: rgba(0, 0, 0, 0.8);
         transform: translateY(-50%) scale(1.1);
+    }
+    
+    .build-header h2 {
+        font-size: 2rem;
+    }
+    
+    .build-images {
+        grid-template-columns: 1fr;
+    }
+    
+    .build-images img {
+        height: 200px;
+    }
+    
+    .build-description {
+        font-size: 1rem;
     }
 }
 
