@@ -1,0 +1,96 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grovus' Builds</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+      }
+    }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+  
+<body data-theme="dark">
+
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="LogoImage.png" alt="Grovus Logo" class="logo-img">
+            </div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#builds">Builds</a>
+                <label class="theme-switch">
+                    <input type="checkbox" id="theme-toggle">
+                    <span class="slider"></span>
+                </label>
+                <a href="https://grovus.carrd.co" target="_blank" rel="noopener noreferrer" class="carrd-link" aria-label="Grovus' Carrd Page">
+                    <img src="CarrdLogoWhite.png" alt="Carrd Logo">
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home">
+            <div class="hero-content">
+                <h1>Grovus' Builds</h1>
+                <div class="hero-description">
+                    <p>This site is where I can post my builds for Sale and Download!</p>
+                    <p>I specialize in bringing iconic maps and structures from movies, shows, and games into Minecraft while maintaining their original charm!</p>
+                </div>
+                <a href="#builds" class="cta-button" data-section="builds">
+                    <span>Explore Builds</span>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+            </div>
+        </section>
+
+        <section id="builds" style="display: none;">
+             <h1>Builds Showcase</h1>
+             <div class="builds-container">
+                <aside class="builds-sidebar">
+                    <div class="sidebar-controls">
+                        <input type="text" id="search-input" placeholder="Search builds..." class="search-input">
+                        <select id="main-category-filter" class="tag-filter">
+                            <option value="">All Categories</option>
+                        </select>
+                        <select id="title-filter" class="tag-filter" style="display: none;">
+                            <option value="">All Titles</option>
+                        </select>
+                        <select id="general-filter" class="tag-filter">
+                            <option value="">All Types</option>
+                        </select>
+                    </div>
+                    <ul id="builds-list">
+                        <!-- Build items will be injected here -->
+                    </ul>
+                </aside>
+                <main class="builds-main">
+                    <!-- Empty state - will be replaced when a build is selected -->
+                    <div class="empty-state">
+                        <h2>Select a build from the sidebar</h2>
+                        <p>Choose any build from the list to view its details, images, and download link.</p>
+                    </div>
+                </main>
+            </div>
+        </section>
+    </main>
+
+    <div id="image-modal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modal-img">
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
