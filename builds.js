@@ -56,5 +56,5 @@ function getDownloadCount(buildId) {
 }
 
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { builds, getBuilds, getDownloadCount };
+    module.exports = { builds, getBuilds };
 }
