@@ -21,7 +21,9 @@
 
     <header>
         <nav>
-            <div class="logo">Grovus</div>
+            <div class="logo">
+                <img src="LogoImage.png" alt="Grovus Logo" class="logo-img">
+            </div>
             <div class="nav-links">
                 <a href="#home">Home</a>
                 <a href="#builds">Builds</a>
@@ -38,15 +40,37 @@
 
     <main>
         <section id="home">
-            <h1>Grovus' Builds</h1>
-            <p>This site is where I can post my builds for Sale and Download!</p>
-            <p>Check out the "Builds" tab to check them out!</p>
+            <div class="hero-content">
+                <h1>Grovus' Builds</h1>
+                <div class="hero-description">
+                    <p>This site is where I can post my builds for Sale and Download!</p>
+                    <p>I specialize in bringing iconic maps and structures from movies, shows, and games into Minecraft while maintaining their original charm!</p>
+                </div>
+                <a href="#builds" class="cta-button" data-section="builds">
+                    <span>Explore Builds</span>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+            </div>
         </section>
 
         <section id="builds" style="display: none;">
              <h1>Builds Showcase</h1>
              <div class="builds-container">
                 <aside class="builds-sidebar">
+                    <div class="sidebar-controls">
+                        <input type="text" id="search-input" placeholder="Search builds..." class="search-input">
+                        <select id="main-category-filter" class="tag-filter">
+                            <option value="">All Categories</option>
+                        </select>
+                        <select id="title-filter" class="tag-filter" style="display: none;">
+                            <option value="">All Titles</option>
+                        </select>
+                        <select id="general-filter" class="tag-filter">
+                            <option value="">All Types</option>
+                        </select>
+                    </div>
                     <ul id="builds-list">
                         <!-- Build items will be injected here -->
                     </ul>
