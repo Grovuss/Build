@@ -5,14 +5,14 @@ const builds = [
         description: `
 **A simple, open Minecraft recreation of GM_Flatgrass from GMOD.**
 
-Perfect for building, testing, or sandbox-style experiments.
+Perfect for building, testing, trying out new mods, or sandbox style experiments.
 
 ## Features
 
 - **Large flat grass field** — endless space for building, testing, and messing around
 - **Accurate proportions** — matches the original map's scale and simplicity
-- **Hidden room** — just like the original, tucked beneath the spawn area
 - **Minimal terrain clutter** — perfect for experiments, Redstone testing, or PvP
+- **Hidden room** — just like the original, tucked beneath the spawn area
         `,
         images: [
             'Flatgrass1.png',
@@ -28,7 +28,7 @@ Perfect for building, testing, or sandbox-style experiments.
         description: `
 **A faithful, Minecraft recreation of GM_Construct from GMOD.**
 
-Explore a clean, versatile space ideal for building, experimenting with redstone, testing creations, or hosting sandbox-style sessions with friends.
+A nice clean space ideal for building, experimenting, testing creations, trying out new mods, or hosting sandbox style sessions with friends.
 
 ## Features
 
